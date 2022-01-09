@@ -18,7 +18,7 @@ const Home = () => {
         fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${apiConfig.apiKey}&language=en-US&page=1`)
         .then((respons)=>respons.json())
         .then(({results}) => setPopularTV(results))
-
+    
       },[])
 
       useEffect(()=>{
