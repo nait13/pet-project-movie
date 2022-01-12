@@ -1,0 +1,17 @@
+.casts {
+    width: 100%;
+    display: flex;
+
+    align-items: center;
+    justify-content: space-around;
+    // height: 200px;
+    .casts-item{
+        width: 100%;
+    }
+    .casts-item-img{
+        width: 100%;
+        padding-top: 160px;
+        background-size: cover;
+        margin-bottom: 0.5rem;
+    }
+}
