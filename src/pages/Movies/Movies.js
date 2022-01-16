@@ -5,6 +5,11 @@ import CustomPagination from '../../components/CustomPagination/CustomPagination
 import Genres from '../../components/Genres/Genres'
 import './Movies.scss'
 
+
+
+
+
+
 export default function Movies() {
     const [page, setPage] = useState(1);
     const [dataMovie, setDataMovie] = useState([]);
@@ -12,11 +17,8 @@ export default function Movies() {
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [genres, setGenres] = useState();
     const ref = useRef(dataMovie);
-    // useEffect(()=>{
-    //     fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiConfig.apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_watch_monetization_types=flatrate`)
-    //     .then((respons)=>respons.json())
-    //     .then(({results})=>setDataMovie(results));
-    // },[page])
+    const [input,setInput] = useState('');
+
     
   useEffect(() => {
     let cleanupFunction = false;
@@ -40,7 +42,9 @@ export default function Movies() {
     return () => cleanupFunction = true;
   }, [page]);
     
-
+  const handl = ({target:{value}}) =>{
+    setInput(value)
+  }
 
   const handlPageChange = (e) => {
     console.log(e.target.textContent)
@@ -48,7 +52,7 @@ export default function Movies() {
     // window.scroll(0,0);
 }
 
-  // console.log("DATAMOVIE",dataMovie)
+
     return (
         <div className='movie-page'>
             <h2 className='title-page'>Movies</h2>

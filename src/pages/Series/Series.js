@@ -5,6 +5,8 @@ import CustomPagination from '../../components/CustomPagination/CustomPagination
 import Genres from '../../components/Genres/Genres'
 import './Series.scss'
 
+
+
 export default function Series() {
     const [page, setPage] = useState(1);
     const [dataTv, setDataTv] = useState([]);
@@ -12,11 +14,6 @@ export default function Series() {
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [genres, setGenres] = useState();
 
-    useEffect(()=>{
-        fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${apiConfig.apiKey}&language=en-US&page=${page}`)
-        .then((respons)=>respons.json())
-        .then(({results})=>setDataTv(results));
-    },[page])
     
   useEffect(() => {
     let cleanupFunction = false;
@@ -45,7 +42,7 @@ export default function Series() {
     window.scroll(0,0);
 }
 
-  console.log("DATATv",dataTv)
+
     return (
         <div className='movie-page'>
             <h2 className='title-page'>Series</h2>

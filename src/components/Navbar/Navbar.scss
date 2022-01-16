@@ -54,6 +54,34 @@
 }
 
 
+.search-box{
+    display: inline-flex;
+    background: #2f3640;
+    height: 40px ;
+    border-radius: 10px;
+    padding: 10px;
+
+}
+.search-btn{
+    cursor: pointer;
+    &:hover{
+        color: red;
+    }
+}
+.search-text{
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    color: #ffffff;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 100%;
+}
+
+
 .hamburger-menu{
     height: 30px;
     width: 30px;

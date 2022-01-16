@@ -1,0 +1,19 @@
+.movie-page{
+    width: 100%;
+    margin: 0 auto;
+}
+.movie-conteiner-item{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: 100vh;
+    .movie-item{
+        width: 200px;
+        // height: 300px;
+        margin: 5px;
+    }
+    
+}

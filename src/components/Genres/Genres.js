@@ -11,6 +11,7 @@ function Genres({ setGenres, genres, type, selectedGenres, setPage, setSelectedG
         setGenres(genres.filter((item) => item.id !== genre.id))
         setPage(1);
     }
+    
     const handleRemove = (genre) => {
         setSelectedGenres(
           selectedGenres.filter((selected) => selected.id !== genre.id)
