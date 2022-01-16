@@ -8,6 +8,7 @@ import Home from './pages/Home/Home';
 import Footer from './pages/Footer/Footer';
 import Detail from './components/Detail/Detail';
 import Search from './pages/Search/Search';
+import { PageNotFound } from './pages/PageNotFound/PageNotFound';
 
 
 
@@ -23,6 +24,7 @@ function App() {
               <Route path = '/series' element = {<Series/>} />
               <Route path = '/:category/:id' element = {<Detail/>}/>
               <Route path = '/search/:keyword' element = {<Search/>}/>
+              <Route path='*' element={<PageNotFound/>} />
             </Routes>
         </div>
         <Footer/>
