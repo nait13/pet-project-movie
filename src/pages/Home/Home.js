@@ -3,7 +3,6 @@ import React,{useEffect,useState} from 'react'
 import MovieSlider from '../../components/MovieSliders/MovieSlider'
 import MovieList from '../../components/MovieList/MovieList'
 import apiConfig from '../../api/apiConfig'
-import Trending from '../Trending/Trending'
 import './Home.scss'
 import "swiper/css";
 import "swiper/css/navigation"

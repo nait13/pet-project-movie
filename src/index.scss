@@ -35,7 +35,8 @@ img{
   padding-bottom: 70px;
 }
 .container {
-  max-width: 1660px;
+  max-width: 1920px;
+  padding: 0 20px;
   margin: auto;
 }
 
@@ -61,5 +62,8 @@ img{
   // }
   .title-page{
     font-size: 5vw;
+  }
+  .container{
+    padding: 0;
   }
 }

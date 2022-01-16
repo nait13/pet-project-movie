@@ -148,23 +148,9 @@
 
 
 }
-// &.active > &__content{
-//     .btns,
-//     .title,
-//     .overview {
-//         opacity: 1;
-//         transform: translateY(0);
-//     }
 
-//    .title {
-//        transition-delay: 0.3s, 0.3s;
-//     }
-
-//    .overview {
-//         transition-delay: 0.6s, 0.6s;
-//     }
-
-//     .btns {
-//         transition-delay: 0.9s, 0.9s;
-//     }
-// }
+@media only screen and (max-width:650px) {
+    .movie-slider__item{
+        height: 40vh;
+    }
+  }

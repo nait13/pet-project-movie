@@ -7,6 +7,10 @@ import './Navbar.scss'
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { searchMovieFetchData } from '../../redux/movieActions';
+import MicIcon from '@mui/icons-material/Mic';
+import MicOffIcon from '@mui/icons-material/MicOff';
+import Modal from '../Modal/Modal';
+import SpeachSearch from '../../utils/SpeachSerch';
 
 
 const Navbar = () => {
@@ -18,6 +22,10 @@ const Navbar = () => {
 
     const [search,setSearch] = useState('')
 
+    const [modalActiv , setModalActiv] = useState(false);
+
+
+
     const handleSearch = ({target:{value}}) => {
         setSearch(value)
     }
@@ -25,17 +33,22 @@ const Navbar = () => {
     const handlSearch = () => {
         if(search.trim().length>0){
             dispatch(searchMovieFetchData(`
-                https://api.themoviedb.org/3/search/multi?api_key=${apiConfig.apiKey}&language=en-US&query=${search}&page=1&include_adult=false`
+                https://api.themoviedb.org/3/search/multi?api_key=${apiConfig.apiKey}&language=ru-RU&query=${search}&page=1&include_adult=false`
             ))
             navigate(`/search/${search}`)
         }
         setSearch('')
     }
 
+    const fx = () => {
+        setModalActiv(!modalActiv)
+    }
+
     console.log("RERENDER NAVBAR")
     return (
         <div className='nav-wrapper'>
             <div className='container'>
+                <Modal active = {modalActiv} setActive = {setModalActiv}><SpeachSearch/></Modal>
                 <div className='nav'>
                     <Link to={'/'} className='logo' onClick={()=>{window.scroll(0,0)}}>
                         <i className='bx bx-movie-play bx-tada main-color'>Cinema<img src={logo}/><span className='main-color'>BOX</span></i>
@@ -44,6 +57,9 @@ const Navbar = () => {
                             <li>
                             <div className='search-box'>
                                 <input className='search-text' type='text' placeholder='Search...' onChange={handleSearch} value={search}/>
+                                <div className={`search-btn micro${modalActiv ? ` activ`: ''}`} onClick={fx}>
+                                    <i>{modalActiv? <MicIcon/> : <MicOffIcon/>}</i>
+                                </div>
                                 <div className='search-btn' onClick={handlSearch}>
                                     <i><SearchIcon/></i>
                                 </div>
