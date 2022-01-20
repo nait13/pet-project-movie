@@ -16,6 +16,7 @@ function Genres({ setGenres, genres, type, selectedGenres, setPage, setSelectedG
 
 
     const handleAdd = (genre) => {
+        console.log(genre)
         setSelectedGenres([...selectedGenres, genre]);
         setGenres(genres.filter((item) => item.id !== genre.id))
         setPage(1);
@@ -29,20 +30,32 @@ function Genres({ setGenres, genres, type, selectedGenres, setPage, setSelectedG
         setPage(1);
       };
 
+      
 
     useEffect(() => {
         fetch(`https://api.themoviedb.org/3/genre/${type}/list?api_key=${apiConfig.apiKey}&language=en-US`)
             .then((respons) => respons.json())
             .then(({ genres }) => setGenres(genres))
+            .catch((err) => console.log(err))
         return () => {
             setGenres({})
         }
-    }, [])
+    }, [type])
 
     console.log(genres)
     return (
         <div className='genres-wrapper' style={{ padding: "6px 0" }}>
             <ThemeProvider theme={darkTheme}>
+                {genres?.map((genre) => (
+                    <Chip
+                        style={{ margin: 2 }}
+                        label={genre.name}
+                        key={genre.id}
+                        clickable
+                        size="small"
+                        onClick={() => handleAdd(genre)}
+                    />
+                ))}
                 {selectedGenres?.map((genre) => (
                     <Chip
                         style={{ margin: 2 }}
@@ -52,16 +65,6 @@ function Genres({ setGenres, genres, type, selectedGenres, setPage, setSelectedG
                         clickable
                         size="small"
                         onDelete={() => handleRemove(genre)}
-                    />
-                ))}
-                {genres?.map((genre) => (
-                    <Chip
-                        style={{ margin: 2 }}
-                        label={genre.name}
-                        key={genre.id}
-                        clickable
-                        size="small"
-                        onClick={() => handleAdd(genre)}
                     />
                 ))}
             </ThemeProvider>

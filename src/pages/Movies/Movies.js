@@ -6,9 +6,9 @@ import apiConfig from '../../api/apiConfig'
 import CustomPagination from '../../components/CustomPagination/CustomPagination';
 import Genres from '../../components/Genres/Genres'
 import useGenre from '../../components/hooks/useGenre.js'
-import './Movies.scss'
 import { getDataMovie } from '../../redux/asyncAction/asyncAction';
 import preloder from '../../assets/img/preloder4.gif'
+import './Movies.scss'
 
 
 export default function Movies() {
@@ -22,7 +22,6 @@ export default function Movies() {
 
   const dispatch = useDispatch()
     
-  console.log(preloder)
   const movieItemsData = useSelector(getMovieData)
   const namberOfpages = useSelector(getPageNumber)
 
@@ -55,7 +54,7 @@ export default function Movies() {
               setPage = {setPage}
               setSelectedGenres = {setSelectedGenres}/>
             <div className='movie-conteiner-item'>
-                {movieItemsData ? movieItemsData.map((item) => <MovieCard key={item.id} {...item} mediaType = 'movie'  />) : <img style={{backgroundColor:'black'}} src={preloder}/>}
+                {movieItemsData ? movieItemsData.map((item) => <MovieCard key={item.id} {...item} mediaType = 'movie'  />) : <img src={preloder}/>}
             </div>
             <CustomPagination handlPageChange={handlPageChange} numberOfPages={namberOfpages}/>
         </div>

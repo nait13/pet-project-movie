@@ -1,55 +1,52 @@
-import React, { useState , useEffect} from 'react'
+import React, { useState , useEffect ,useRef} from 'react'
+import {useSelector, useDispatch} from 'react-redux';
+import {getMovieData,getPageNumber} from '../../redux/movieSelectors'
 import MovieCard from '../../components/MovieCard/MovieCard'
 import apiConfig from '../../api/apiConfig'
 import CustomPagination from '../../components/CustomPagination/CustomPagination';
 import Genres from '../../components/Genres/Genres'
 import useGenre from '../../components/hooks/useGenre.js'
+import { getDataMovie } from '../../redux/asyncAction/asyncAction';
+import preloder from '../../assets/img/preloder4.gif'
 import './Series.scss'
 
 
+export default function Movies() {
+  const [page, setPage] = useState(1);
+  const [dataMovie, setDataMovie] = useState([]);
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [genres, setGenres] = useState();
+  const ref = useRef(dataMovie);
+  const [input,setInput] = useState('');
+  const genreforUrl = useGenre(selectedGenres)
 
-export default function Series() {
-    const [page, setPage] = useState(1);
-    const [dataTv, setDataTv] = useState([]);
-    const [numberOfPages, setNumberOfPages] = useState(1);
-    const [selectedGenres, setSelectedGenres] = useState([]);
-    const [genres, setGenres] = useState([]);
-    const genreforUrl = useGenre(selectedGenres)
-
-    console.log(genreforUrl)
+  const dispatch = useDispatch()
     
-  useEffect(() => {
-    let cleanupFunction = false;
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${apiConfig.apiKey}&language=en-US&page=${page}&with_genres=${genreforUrl}`)
-        const result = await response.json();
+  console.log(preloder)
+  const movieItemsData = useSelector(getMovieData)
+  const namberOfpages = useSelector(getPageNumber)
 
-        setNumberOfPages(result.total_pages)
-        console.log(result, 'result')
+  console.log('SATTEMOVIE',movieItemsData);  
 
-        // непосредственное обновление состояния при условии, что компонент не размонтирован
-        if(!cleanupFunction) setDataTv(result.results);
-      } catch (e) {
-        console.error(e.message)
-      }
-    };
-    fetchData();
-    // функция очистки useEffect
-    return () => cleanupFunction = true;
-  }, [page , genreforUrl]);
+  useEffect(()=>{
+    dispatch(getDataMovie(`https://api.themoviedb.org/3/discover/tv?api_key=${apiConfig.apiKey}&language=ru&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforUrl}`))
+
+  },[page,genreforUrl])
+
     
+  const handl = ({target:{value}}) =>{
+    setInput(value)
+  }
 
   const handlPageChange = (e) => {
     console.log(e.target.textContent)
     setPage(e.target.textContent)
     window.scroll(0,0);
 }
-  console.log('Genres',genres)
-  console.log(selectedGenres)
+    console.log(selectedGenres)
     return (
         <div className='movie-page'>
-            <h2 className='title-page'>Series</h2>
+            <h2 className='title-page'>Movies</h2>
             <Genres 
               type = 'tv' 
               selectedGenres = {selectedGenres}
@@ -58,9 +55,9 @@ export default function Series() {
               setPage = {setPage}
               setSelectedGenres = {setSelectedGenres}/>
             <div className='movie-conteiner-item'>
-                {dataTv ? dataTv.map((item) => <MovieCard key={item.id} {...item} mediaType = 'tv'  />) : 'Loding...'}
+                {movieItemsData ? movieItemsData.map((item) => <MovieCard key={item.id} {...item} mediaType = 'tv'  />) : <img src={preloder}/>}
             </div>
-            <CustomPagination  handlPageChange={handlPageChange} numberOfPages={numberOfPages}/>
+            <CustomPagination handlPageChange={handlPageChange} numberOfPages={namberOfpages}/>
         </div>
     )
 }

@@ -13,7 +13,6 @@ export function searchMovieFetchDataSuccess(movie){
 
 
 export function dataMovieSuccess(data){
-    console.log('dataFETCH',data)
     return {
         type:movieActionTypes.MOVIE_SUCCESS,
         payload: {

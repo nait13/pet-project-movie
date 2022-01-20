@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import { useParams } from 'react-router';
 import apiConfig from '../../../../api/apiConfig';
+import notImg from '../../../../assets/img/posterNot.jpg'
 import './CastList.scss'
 
 const CastList = (props) => {
@@ -32,7 +33,7 @@ const CastList = (props) => {
         <div className='casts'>
             {casts?.map((item)=> (
                 <div className='casts-item' key={item.credit_id}>
-                    <div className="casts-item-img" style={{backgroundImage: `url(${apiConfig.w300Imag(item.profile_path)})`}}></div>
+                    <div className="casts-item-img" style={{backgroundImage: `url(${item.profile_path ? apiConfig.w300Imag(item.profile_path):notImg })`}}></div>
                     <p className='casts-item-name'>{item.name}</p>
                 </div>
                 ))

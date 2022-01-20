@@ -17,6 +17,7 @@ const Home = () => {
         fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${apiConfig.apiKey}&language=en-US&page=1`)
         .then((respons)=>respons.json())
         .then(({results}) => setPopularTV(results))
+        .catch((er)=>console.log(er))
     
       },[])
 
@@ -24,6 +25,7 @@ const Home = () => {
         fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiConfig.apiKey}&language=en-US&page=1`)
         .then((respons)=>respons.json())
         .then(({results}) => setTopRated(results))
+        .catch((er)=>console.log(er))
 
       },[])
 
@@ -31,11 +33,11 @@ const Home = () => {
         fetch(`https://api.themoviedb.org/3/tv/top_rated?api_key=${apiConfig.apiKey}&language=en-US&page=1`)
         .then((respons)=>respons.json())
         .then(({results}) => settopRatedTv(results))
+        .catch((er)=>console.log(er))
 
       },[])
 
 
-      console.log('TOP RATED',topRatedTv)
 
     return (
         <>

@@ -27,7 +27,6 @@ const MovieSlider = () => {
         .catch((er)=>console.log('ERROR',er));
     }, []);
 
-    console.log('MOVIE ITEM',movieItems)
     return (
         <div className="slider-section">
             <div className='hero-slider'>
