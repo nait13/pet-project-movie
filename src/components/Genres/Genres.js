@@ -2,6 +2,8 @@ import { Chip } from '@mui/material'
 import React, { useEffect } from 'react'
 import apiConfig from '../../api/apiConfig'
 import { createTheme ,ThemeProvider } from '@mui/material';
+import './Genres.scss'
+
 
 const darkTheme = createTheme({
     palette: {
@@ -39,7 +41,7 @@ function Genres({ setGenres, genres, type, selectedGenres, setPage, setSelectedG
 
     console.log(genres)
     return (
-        <div style={{ padding: "6px 0" }}>
+        <div className='genres-wrapper' style={{ padding: "6px 0" }}>
             <ThemeProvider theme={darkTheme}>
                 {selectedGenres?.map((genre) => (
                     <Chip

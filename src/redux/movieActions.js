@@ -12,16 +12,12 @@ export function searchMovieFetchDataSuccess(movie){
 
 
 
-export function searchMovieFetchData(url){
-    return ( dispatch ) => {
-        fetch(url)
-            .then((respons)=>{
-                if(!respons.ok){
-                    throw new Error(respons.statusText)
-                }
-                return respons;
-            })
-            .then((respons)=>respons.json())
-            .then(({results}) => dispatch(searchMovieFetchDataSuccess(results)))
+export function dataMovieSuccess(data){
+    console.log('dataFETCH',data)
+    return {
+        type:movieActionTypes.MOVIE_SUCCESS,
+        payload: {
+            dataMovie:data
+        }
     }
 }

@@ -6,7 +6,7 @@ import apiConfig from '../../api/apiConfig';
 import './Navbar.scss'
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import { searchMovieFetchData } from '../../redux/movieActions';
+import { searchMovieFetchData } from '../../redux/asyncAction/asyncAction';
 import MicIcon from '@mui/icons-material/Mic';
 import MicOffIcon from '@mui/icons-material/MicOff';
 import Modal from '../Modal/Modal';

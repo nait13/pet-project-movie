@@ -1,48 +1,38 @@
 import React, { useState , useEffect ,useRef} from 'react'
+import {useSelector, useDispatch} from 'react-redux';
+import {getMovieData,getPageNumber} from '../../redux/movieSelectors'
 import MovieCard from '../../components/MovieCard/MovieCard'
 import apiConfig from '../../api/apiConfig'
 import CustomPagination from '../../components/CustomPagination/CustomPagination';
 import Genres from '../../components/Genres/Genres'
-import './Movies.scss'
 import useGenre from '../../components/hooks/useGenre.js'
-
-
-
+import './Movies.scss'
+import { getDataMovie } from '../../redux/asyncAction/asyncAction';
+import preloder from '../../assets/img/preloder4.gif'
 
 
 export default function Movies() {
   const [page, setPage] = useState(1);
   const [dataMovie, setDataMovie] = useState([]);
-  const [numberOfPages, setNumberOfPages] = useState(1);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [genres, setGenres] = useState();
   const ref = useRef(dataMovie);
   const [input,setInput] = useState('');
   const genreforUrl = useGenre(selectedGenres)
-    
-    
-  useEffect(() => {
-    let cleanupFunction = false;
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiConfig.apiKey}&language=ru&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforUrl}`)
-        const result = await response.json();
 
-        setNumberOfPages(result.total_pages)
-        console.log(result)
-        // console.log(result, 'result')
-        console.log('REF',dataMovie)
+  const dispatch = useDispatch()
+    
+  console.log(preloder)
+  const movieItemsData = useSelector(getMovieData)
+  const namberOfpages = useSelector(getPageNumber)
 
-        // непосредственное обновление состояния при условии, что компонент не размонтирован
-        if(!cleanupFunction) setDataMovie([...dataMovie,...result.results]);
-      } catch (e) {
-        console.error(e.message)
-      }
-    };
-    fetchData();
-    // функция очистки useEffect
-    return () => cleanupFunction = true;
-  }, [page,genreforUrl]);
+  console.log('SATTEMOVIE',movieItemsData);  
+
+  useEffect(()=>{
+    dispatch(getDataMovie(`https://api.themoviedb.org/3/discover/movie?api_key=${apiConfig.apiKey}&language=ru&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforUrl}`))
+
+  },[page,genreforUrl])
+
     
   const handl = ({target:{value}}) =>{
     setInput(value)
@@ -51,7 +41,7 @@ export default function Movies() {
   const handlPageChange = (e) => {
     console.log(e.target.textContent)
     setPage(e.target.textContent)
-    // window.scroll(0,0);
+    window.scroll(0,0);
 }
     console.log(selectedGenres)
     return (
@@ -65,9 +55,9 @@ export default function Movies() {
               setPage = {setPage}
               setSelectedGenres = {setSelectedGenres}/>
             <div className='movie-conteiner-item'>
-                {dataMovie ? dataMovie.map((item) => <MovieCard key={item.id} {...item} mediaType = 'movie'  />) : 'Loding...'}
+                {movieItemsData ? movieItemsData.map((item) => <MovieCard key={item.id} {...item} mediaType = 'movie'  />) : <img style={{backgroundColor:'black'}} src={preloder}/>}
             </div>
-            <CustomPagination handlPageChange={handlPageChange} numberOfPages={numberOfPages}/>
+            <CustomPagination handlPageChange={handlPageChange} numberOfPages={namberOfpages}/>
         </div>
     )
 }

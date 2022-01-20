@@ -4,6 +4,7 @@ import './MovieCard.scss';
 import { useNavigate , Link} from 'react-router-dom';
 import star from '../../assets/img/star.png'
 import notPoster from '../../assets/img/posterNot.jpg'
+import preloder from '../../assets/img/preloder.gif'
 
 const ratedColor = (number) => {
     if(number <= 5) return 'red'
@@ -16,10 +17,11 @@ export default function MovieCard({ id, poster_path, title, release_date, media_
 
     const link = `/${media_type || mediaType}/${id}`
     const img = `${poster_path ? apiConfig.w300Imag(poster_path) :  apiConfig.w300Imag(backdrop_path)}`;
+
     return (
         <Link to={link}>
             <div className='movie-item'>
-                <img src={img ? img:notPoster} alt={title}/>
+                <img src={img ? img:preloder} alt={title}/>
                 <div className='movie-item-content'>
                     <div className='movie-item-tittle'>
                         {name || title || original_name  }
@@ -35,26 +37,3 @@ export default function MovieCard({ id, poster_path, title, release_date, media_
         </Link>
     )
 }
-
-
-// const MovieCard = props => {
-
-//     const item = props.item;
-
-//     const link = '/' + category[props.category] + '/' + item.id;
-
-//     const bg = apiConfig.w500Image(item.poster_path || item.backdrop_path);
-
-//     return (
-//         <Link to={link}>
-//             <div className="movie-card" style={{ backgroundImage: `url(${bg})` }}>
-//                 <Button>
-//                     <i className="bx bx-play"></i>
-//                 </Button>
-//             </div>
-//             <h3>{item.title || item.name}</h3>
-//         </Link>
-//     );
-// }
-
-// export default MovieCard;

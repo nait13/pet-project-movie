@@ -3,6 +3,7 @@ import { useParams } from 'react-router'
 import apiConfig from '../../api/apiConfig'
 import CastList from './detail-utils/CastList/CastList'
 import VideoList from './detail-utils/VideoList/VideoList'
+import preloder from '../../assets/img/preloder.gif'
 import './Details.scss'
 
 
@@ -18,9 +19,6 @@ const Detail = () => {
         window.scroll(0,0)
     },[category , id])
 
-    console.log(item);
-    
-
 
     return (
         <>
@@ -35,7 +33,7 @@ const Detail = () => {
                                 <h1 className='title'>{item.title || item.original_name }</h1>
                                 <div className='tagline'>{item.tagline}</div>
                                 <div className='details-vote'>{item.vote_average}</div>
-                                <div className='detailt-button-add-kab'><button>AD to my watch list</button></div>
+                                {/* <div className='detailt-button-add-kab'><button>AD to my watch list</button></div> */}
                                 <p>{item.overview}</p>
                                 <div className="genres">
                                    <div className='genres-title'>
@@ -47,10 +45,10 @@ const Detail = () => {
                                         ))
                                     }
                                 </div>
-                                <div className='additional-info'>
+                                {/* <div className='additional-info'>
                                     <div>{item.release_date}</div>
-                                    <div>{item.runtime}min</div>
-                                </div>
+                                    <div>{item.runtime}  min</div>
+                                </div> */}
                             </div>
                         </div>                        
                     </div>
