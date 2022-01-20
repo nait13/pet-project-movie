@@ -10,6 +10,8 @@ export function searchMovieFetchDataSuccess(movie){
     }
 }
 
+
+
 export function searchMovieFetchData(url){
     return ( dispatch ) => {
         fetch(url)

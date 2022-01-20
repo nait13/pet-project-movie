@@ -26,10 +26,12 @@ const CastList = (props) => {
       }, [props.id]);
 
       console.log(casts)
+
+      
     return (
         <div className='casts'>
             {casts?.map((item)=> (
-                <div className='casts-item' key={item.cast_id}>
+                <div className='casts-item' key={item.credit_id}>
                     <div className="casts-item-img" style={{backgroundImage: `url(${apiConfig.w300Imag(item.profile_path)})`}}></div>
                     <p className='casts-item-name'>{item.name}</p>
                 </div>

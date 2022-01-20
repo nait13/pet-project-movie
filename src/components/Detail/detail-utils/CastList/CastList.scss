@@ -1,17 +1,28 @@
+
+
+
 .casts {
     width: 100%;
-    display: flex;
-
+    flex-wrap: wrap;
+    // display: grid;
+    // grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    // gap: 10px;
+    display: inline-flex;
     align-items: center;
-    justify-content: space-around;
-    // height: 200px;
+    justify-content: center;
+
     .casts-item{
-        width: 100%;
+        width: 200px;
+        height: 250px;
+        margin-bottom: 30px;
+        margin: 0 10px;
     }
     .casts-item-img{
         width: 100%;
-        padding-top: 160px;
+        // height: 250px;
+        height: 100%;
         background-size: cover;
+        background-position: center;
         margin-bottom: 0.5rem;
     }
 }

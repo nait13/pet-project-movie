@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import logo from '../../assets/img/video.png';
 import { Link ,useNavigate } from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
@@ -30,7 +30,11 @@ const Navbar = () => {
         setSearch(value)
     }
 
-    const handlSearch = () => {
+    // useEffect(()=>{
+    //     handlFetchSearch()
+    // },[search])
+    
+    const handlFetchSearch = () => {
         if(search.trim().length>0){
             dispatch(searchMovieFetchData(`
                 https://api.themoviedb.org/3/search/multi?api_key=${apiConfig.apiKey}&language=ru-RU&query=${search}&page=1&include_adult=false`
@@ -40,15 +44,17 @@ const Navbar = () => {
         setSearch('')
     }
 
-    const fx = () => {
+    const handlClickModal = () => {
         setModalActiv(!modalActiv)
     }
 
-    console.log("RERENDER NAVBAR")
+    console.log("RERENDER NAVBAR",search)
     return (
         <div className='nav-wrapper'>
             <div className='container'>
-                <Modal active = {modalActiv} setActive = {setModalActiv}><SpeachSearch/></Modal>
+                <Modal active = {modalActiv} setActive = {setModalActiv}>
+                    <SpeachSearch poisk = {setSearch}/>
+                </Modal>
                 <div className='nav'>
                     <Link to={'/'} className='logo' onClick={()=>{window.scroll(0,0)}}>
                         <i className='bx bx-movie-play bx-tada main-color'>Cinema<img src={logo}/><span className='main-color'>BOX</span></i>
@@ -57,10 +63,10 @@ const Navbar = () => {
                             <li>
                             <div className='search-box'>
                                 <input className='search-text' type='text' placeholder='Search...' onChange={handleSearch} value={search}/>
-                                <div className={`search-btn micro${modalActiv ? ` activ`: ''}`} onClick={fx}>
+                                <div className={`search-btn micro${modalActiv ? ` activ`: ''}`} onClick={handlClickModal}>
                                     <i>{modalActiv? <MicIcon/> : <MicOffIcon/>}</i>
                                 </div>
-                                <div className='search-btn' onClick={handlSearch}>
+                                <div className='search-btn' onClick={handlFetchSearch}>
                                     <i><SearchIcon/></i>
                                 </div>
                             </div>

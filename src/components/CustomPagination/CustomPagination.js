@@ -3,12 +3,13 @@ import Pagination from '@mui/material/Pagination';
 import './CustomPagination.scss'
 import { createTheme ,ThemeProvider } from '@mui/material';
 
-const darkTheme = createTheme({
-    palette:{
-        type:'dark',
-    },
-});
 
+const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
+  
 const CustomPagination = ({handlPageChange, numberOfPages = 10}) => {
     return (
         <div className='pagination'>

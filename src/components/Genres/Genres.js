@@ -1,6 +1,13 @@
 import { Chip } from '@mui/material'
 import React, { useEffect } from 'react'
 import apiConfig from '../../api/apiConfig'
+import { createTheme ,ThemeProvider } from '@mui/material';
+
+const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
 
 
 function Genres({ setGenres, genres, type, selectedGenres, setPage, setSelectedGenres }) {
@@ -20,6 +27,7 @@ function Genres({ setGenres, genres, type, selectedGenres, setPage, setSelectedG
         setPage(1);
       };
 
+
     useEffect(() => {
         fetch(`https://api.themoviedb.org/3/genre/${type}/list?api_key=${apiConfig.apiKey}&language=en-US`)
             .then((respons) => respons.json())
@@ -28,30 +36,33 @@ function Genres({ setGenres, genres, type, selectedGenres, setPage, setSelectedG
             setGenres({})
         }
     }, [])
+
     console.log(genres)
     return (
         <div style={{ padding: "6px 0" }}>
-            {selectedGenres?.map((genre) => (
-                <Chip
-                    style={{ margin: 2 }}
-                    label={genre.name}
-                    key={genre.id}
-                    color="primary"
-                    clickable
-                    size="small"
-                    onDelete={() => handleRemove(genre)}
-                />
-            ))}
-            {genres?.map((genre) => (
-                <Chip
-                    style={{ margin: 2 }}
-                    label={genre.name}
-                    key={genre.id}
-                    clickable
-                    size="small"
-                    onClick={() => handleAdd(genre)}
-                />
-            ))}
+            <ThemeProvider theme={darkTheme}>
+                {selectedGenres?.map((genre) => (
+                    <Chip
+                        style={{ margin: 2 }}
+                        label={genre.name}
+                        key={genre.id}
+                        color="primary"
+                        clickable
+                        size="small"
+                        onDelete={() => handleRemove(genre)}
+                    />
+                ))}
+                {genres?.map((genre) => (
+                    <Chip
+                        style={{ margin: 2 }}
+                        label={genre.name}
+                        key={genre.id}
+                        clickable
+                        size="small"
+                        onClick={() => handleAdd(genre)}
+                    />
+                ))}
+            </ThemeProvider>
         </div>
     );
 };
