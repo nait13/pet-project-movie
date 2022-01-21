@@ -2,9 +2,11 @@ import { Chip } from '@mui/material'
 import React, { useEffect } from 'react'
 import apiConfig from '../../api/apiConfig'
 import { createTheme ,ThemeProvider } from '@mui/material';
+import { useDispatch , useSelector} from 'react-redux';
+import { addSelectedGenres , deletSelectedGenres} from '../../redux/movieActions';
 import './Genres.scss'
 
-
+    
 const darkTheme = createTheme({
     palette: {
       mode: 'dark',
@@ -12,22 +14,27 @@ const darkTheme = createTheme({
   });
 
 
-function Genres({ setGenres, genres, type, selectedGenres, setPage, setSelectedGenres }) {
+function Genres({ setGenres, genres, type, selectedGenres, setPage}) {
+
+    const setSelectedGenress = useSelector(({movieReducer:{selectedGenres}}) => selectedGenres);
+    const dispatch = useDispatch()
 
 
-    const handleAdd = (genre) => {
-        console.log(genre)
-        setSelectedGenres([...selectedGenres, genre]);
+// !!!!!!!!!!!!!!
+    const handleAddGenres = (genre) => {
+        dispatch(addSelectedGenres(genre))
         setGenres(genres.filter((item) => item.id !== genre.id))
-        setPage(1);
     }
-    
+
     const handleRemove = (genre) => {
-        setSelectedGenres(
-          selectedGenres.filter((selected) => selected.id !== genre.id)
-        );
-        setGenres([...genres, genre]);
-        setPage(1);
+        dispatch(deletSelectedGenres(genre))
+        setGenres([...genres,genre])
+
+        // setSelectedGenres(
+        //   selectedGenres.filter((selected) => selected.id !== genre.id)
+        // );
+        // setGenres([...genres, genre]);
+        // setPage(1);
       };
 
       
@@ -42,7 +49,7 @@ function Genres({ setGenres, genres, type, selectedGenres, setPage, setSelectedG
         }
     }, [type])
 
-    console.log(genres)
+    console.log(setSelectedGenress)
     return (
         <div className='genres-wrapper' style={{ padding: "6px 0" }}>
             <ThemeProvider theme={darkTheme}>
@@ -53,10 +60,10 @@ function Genres({ setGenres, genres, type, selectedGenres, setPage, setSelectedG
                         key={genre.id}
                         clickable
                         size="small"
-                        onClick={() => handleAdd(genre)}
+                        onClick={() => handleAddGenres(genre)}
                     />
                 ))}
-                {selectedGenres?.map((genre) => (
+                {setSelectedGenress?.map((genre) => (
                     <Chip
                         style={{ margin: 2 }}
                         label={genre.name}

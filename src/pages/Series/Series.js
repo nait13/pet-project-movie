@@ -46,7 +46,7 @@ export default function Movies() {
     console.log(selectedGenres)
     return (
         <div className='movie-page'>
-            <h2 className='title-page'>Movies</h2>
+            <h2 className='title-page'>Series</h2>
             <Genres 
               type = 'tv' 
               selectedGenres = {selectedGenres}

@@ -4,6 +4,7 @@ import { movieActionTypes } from "./movieActionTypes"
 const initialstate = {
     searchMovies:[],
     dataMovie:[],
+    selectedGenres:[],
 }
 
 
@@ -20,6 +21,19 @@ export const movieReducer = (state = initialstate , action) => {
                 ...state,
                 dataMovie:{...action.payload.dataMovie}            
             }
+
+        case movieActionTypes.ADD_SELECTED_GENRES:
+            return {
+                ...state,
+                selectedGenres:[...state.selectedGenres ,action.payload]
+            } 
+        case movieActionTypes.DELETE_SELECTED_GENRES:
+            return {
+                ...state,
+                selectedGenres:[...state.selectedGenres.filter((item)=> item.id !== action.payload.deleteId )]
+            }
+
+
         default:
             return state;
 
