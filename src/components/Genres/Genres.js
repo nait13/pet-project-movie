@@ -42,7 +42,6 @@ function Genres({ setGenres, genres, type, selectedGenres, setPage, setSelectedG
         }
     }, [type])
 
-    console.log(genres)
     return (
         <div className='genres-wrapper' style={{ padding: "6px 0" }}>
             <ThemeProvider theme={darkTheme}>

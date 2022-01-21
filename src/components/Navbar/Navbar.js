@@ -51,13 +51,12 @@ const Navbar = () => {
     }
 
 
-    console.log("RERENDER NAVBAR",search)
     return (
         <div className='nav-wrapper'>
             <div className='container'>
-                <Modal active = {modalActiv} setActive = {setModalActiv}>
+                {/* <Modal active = {modalActiv} setActive = {setModalActiv}>
                     <SpeachSearch poisk = {setSearch} search = {handlFetchSearch}/>
-                </Modal>
+                </Modal> */}
                 <div className='nav'>
                     <Link to={'/'} className='logo' onClick={()=>{window.scroll(0,0)}}>
                         <i className='bx bx-movie-play bx-tada main-color'>Cinema<img src={logo}/><span className='main-color'>BOX</span></i>
@@ -66,9 +65,9 @@ const Navbar = () => {
                             <li>
                             <div className='search-box'>
                                 <input className='search-text' type='text' placeholder='Search...' onChange={handleSearch} value={search}/>
-                                <div className={`search-btn micro${modalActiv ? ` activ`: ''}`} onClick={handlClickModal}>
+                                {/* <div className={`search-btn micro${modalActiv ? ` activ`: ''}`} onClick={handlClickModal}>
                                     <i>{modalActiv? <MicIcon/> : <MicOffIcon/>}</i>
-                                </div>
+                                </div> */}
                                 <div className='search-btn' onClick={handlFetchSearch}>
                                     <i><SearchIcon/></i>
                                 </div>

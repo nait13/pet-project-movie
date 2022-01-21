@@ -24,8 +24,7 @@ export default function Movies() {
     
   const movieItemsData = useSelector(getMovieData)
   const namberOfpages = useSelector(getPageNumber)
-
-  console.log('SATTEMOVIE',movieItemsData);  
+  
 
   useEffect(()=>{
     dispatch(getDataMovie(`https://api.themoviedb.org/3/discover/movie?api_key=${apiConfig.apiKey}&language=ru&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforUrl}`))
@@ -38,11 +37,9 @@ export default function Movies() {
   }
 
   const handlPageChange = (e) => {
-    console.log(e.target.textContent)
     setPage(e.target.textContent)
     window.scroll(0,0);
-}
-    console.log(selectedGenres)
+  }
     return (
         <div className='movie-page'>
             <h2 className='title-page'>Movies</h2>
