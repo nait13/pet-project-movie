@@ -21,18 +21,18 @@ export function dataMovieSuccess(data){
     }
 }
 
-export function addSelectedGenres (obj) {
-    return {
-        type:movieActionTypes.ADD_SELECTED_GENRES,
-        payload:obj
-    }
-}
+// export function addSelectedGenres (obj) {
+//     return {
+//         type:movieActionTypes.ADD_SELECTED_GENRES,
+//         payload:obj
+//     }
+// }
 
-export function deletSelectedGenres (obj) {
-    return {
-        type:movieActionTypes.DELETE_SELECTED_GENRES,
-        payload:{
-            deleteId: obj.id 
-        }
-    }
-}
+// export function deletSelectedGenres (obj) {
+//     return {
+//         type:movieActionTypes.DELETE_SELECTED_GENRES,
+//         payload:{
+//             deleteId: obj.id 
+//         }
+//     }
+// }

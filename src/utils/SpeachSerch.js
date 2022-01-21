@@ -32,11 +32,13 @@ function SpeachSearch(props) {
       alert("Ups, your browser is not supported!");
     }  
   }, [])
-    
-  // const { transcript } = useSpeechRecognition({ commands })
-  
 
-  console.log(transcript);
+  useEffect(()=>{
+    props.poisk(transcript)
+  },[transcript])
+
+
+  console.log(transcript)
   return (
     <div className='wrapper-micro'>
       <div className='search-micro'>

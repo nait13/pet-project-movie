@@ -12,14 +12,13 @@ import './Movies.scss'
 
 
 export default function Movies() {
-  const setSelectedGenress = useSelector(({movieReducer:{selectedGenres}}) => selectedGenres);
   const [page, setPage] = useState(1);
   const [dataMovie, setDataMovie] = useState([]);
-  // const [selectedGenres, setSelectedGenres] = useState([]);
+  const [selectedGenres, setSelectedGenres] = useState([]);
   const [genres, setGenres] = useState();
   const ref = useRef(dataMovie);
   const [input,setInput] = useState('');
-  const genreforUrl = useGenre(setSelectedGenress)
+  const genreforUrl = useGenre(selectedGenres)
 
   const dispatch = useDispatch()
     
@@ -43,18 +42,17 @@ export default function Movies() {
     setPage(e.target.textContent)
     window.scroll(0,0);
 }
-    console.log(setSelectedGenress)
+    console.log(selectedGenres)
     return (
         <div className='movie-page'>
             <h2 className='title-page'>Movies</h2>
             <Genres 
               type = 'movie' 
-              // selectedGenres = {selectedGenres}
+              selectedGenres = {selectedGenres}
               genres = {genres}
               setGenres = {setGenres} 
-              // setPage = {setPage}
-              // setSelectedGenres = {setSelectedGenres}
-              />
+              setPage = {setPage}
+              setSelectedGenres = {setSelectedGenres}/>
             <div className='movie-conteiner-item'>
                 {movieItemsData ? movieItemsData.map((item) => <MovieCard key={item.id} {...item} mediaType = 'movie'  />) : <img src={preloder}/>}
             </div>

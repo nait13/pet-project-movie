@@ -37,9 +37,11 @@ const Navbar = () => {
     const handlFetchSearch = () => {
         if(search.trim().length>0){
             dispatch(searchMovieFetchData(`
-                https://api.themoviedb.org/3/search/multi?api_key=${apiConfig.apiKey}&language=ru-RU&query=${search}&page=1&include_adult=false`
+                https://api.themoviedb.org/3/search/multi?api_key=${apiConfig.apiKey}&language=en-EN&query=${search}&page=1&include_adult=false`
             ))
+            setShowLinks(false)
             navigate(`/search/${search}`)
+            
         }
         setSearch('')
     }
@@ -48,12 +50,13 @@ const Navbar = () => {
         setModalActiv(!modalActiv)
     }
 
+
     console.log("RERENDER NAVBAR",search)
     return (
         <div className='nav-wrapper'>
             <div className='container'>
                 <Modal active = {modalActiv} setActive = {setModalActiv}>
-                    <SpeachSearch poisk = {setSearch}/>
+                    <SpeachSearch poisk = {setSearch} search = {handlFetchSearch}/>
                 </Modal>
                 <div className='nav'>
                     <Link to={'/'} className='logo' onClick={()=>{window.scroll(0,0)}}>
@@ -71,9 +74,9 @@ const Navbar = () => {
                                 </div>
                             </div>
                             </li>
-                            <li><Link to={'/'}>Home</Link></li>
-                            <li><Link to={'/movies'}>Movie</Link></li>
-                            <li><Link to={'/series'}>Tv Serias</Link></li>
+                            <li><Link onClick={()=>setShowLinks(false)} to={'/'}>Home</Link></li>
+                            <li><Link onClick={()=>setShowLinks(false)} to={'/movies'}>Movie</Link></li>
+                            <li><Link onClick={()=>setShowLinks(false)} to={'/series'}>Tv Serias</Link></li>
                             
                             {/* ***SING IN**** */}
                             
